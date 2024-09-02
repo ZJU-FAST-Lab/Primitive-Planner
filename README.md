@@ -37,7 +37,7 @@ python3 gen_position_swap.py 20 # It will generate the swarm.launch with 20 dron
 roslaunch primitive_planner swarm.launch
 ```
 
-Wait until all the nodes have their launched process finished and keep printing "[FSM]: state: WAIT_TARGET. Waiting for trigger".
+Wait until all the nodes have their launch process finished and keep printing "[FSM]: state: WAIT_TARGET. Waiting for trigger".
 
 Open another terminal, publish the trigger
 ```
