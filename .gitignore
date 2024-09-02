@@ -1,0 +1,10 @@
+.catkin_workspace
+build/
+devel/
+src/CMakeLists.txt
+*.zip
+*.ply
+*.bag
+bags/
+src/planner/plan_manage/primitive_library
+bags_and_logs/

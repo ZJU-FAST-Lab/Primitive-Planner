@@ -1,0 +1,54 @@
+<launch>
+    <node pkg="random_goals" name="random_goals_node" type="random_goals_node" output="screen">
+        <param name="drone_num" value="20"/>
+        <param name="goal_num" value="48"/>
+         <rosparam param="goal0">[-3.0,3.0,0.5]</rosparam>
+        <rosparam param="goal1">[3.0,-3.0,0.5]</rosparam>
+        <rosparam param="goal2">[-3.0,-3.0,0.5]</rosparam>
+        <rosparam param="goal3">[3.0,3.0,0.5]</rosparam>
+        <rosparam param="goal4">[-3.0,3.0,1.5]</rosparam>
+        <rosparam param="goal5">[3.0,-3.0,1.5]</rosparam>
+        <rosparam param="goal6">[-3.0,-3.0,1.5]</rosparam>
+        <rosparam param="goal7">[3.0,3.0,1.5]</rosparam>
+         <rosparam param="goal8">[-3.0,2.0,0.5]</rosparam>
+        <rosparam param="goal9">[3.0,-2.0,0.5]</rosparam>
+        <rosparam param="goal10">[-2.0,-3.0,0.5]</rosparam>
+        <rosparam param="goal11">[2.0,3.0,0.5]</rosparam>
+        <rosparam param="goal12">[-3.0,2.0,1.5]</rosparam>
+        <rosparam param="goal13">[3.0,-2.0,1.5]</rosparam>
+        <rosparam param="goal14">[-2.0,-3.0,1.5]</rosparam>
+        <rosparam param="goal15">[2.0,3.0,1.5]</rosparam>
+         <rosparam param="goal16">[-3.0,1.0,0.5]</rosparam>
+        <rosparam param="goal17">[3.0,-1.0,0.5]</rosparam>
+        <rosparam param="goal18">[-1.0,-3.0,0.5]</rosparam>
+        <rosparam param="goal19">[1.0,3.0,0.5]</rosparam>
+        <rosparam param="goal20">[-3.0,1.0,1.5]</rosparam>
+        <rosparam param="goal21">[3.0,-1.0,1.5]</rosparam>
+        <rosparam param="goal22">[-1.0,-3.0,1.5]</rosparam>
+        <rosparam param="goal23">[1.0,3.0,1.5]</rosparam>
+         <rosparam param="goal24">[-3.0,0.0,0.5]</rosparam>
+        <rosparam param="goal25">[3.0,0.0,0.5]</rosparam>
+        <rosparam param="goal26">[0.0,-3.0,0.5]</rosparam>
+        <rosparam param="goal27">[0.0,3.0,0.5]</rosparam>
+        <rosparam param="goal28">[-3.0,0.0,1.5]</rosparam>
+        <rosparam param="goal29">[3.0,0.0,1.5]</rosparam>
+        <rosparam param="goal30">[0.0,-3.0,1.5]</rosparam>
+        <rosparam param="goal31">[0.0,3.0,1.5]</rosparam>
+         <rosparam param="goal32">[-3.0,-1.0,0.5]</rosparam>
+        <rosparam param="goal33">[3.0,1.0,0.5]</rosparam>
+        <rosparam param="goal34">[1.0,-3.0,0.5]</rosparam>
+        <rosparam param="goal35">[-1.0,3.0,0.5]</rosparam>
+        <rosparam param="goal36">[-3.0,-1.0,1.5]</rosparam>
+        <rosparam param="goal37">[3.0,1.0,1.5]</rosparam>
+        <rosparam param="goal38">[1.0,-3.0,1.5]</rosparam>
+        <rosparam param="goal39">[-1.0,3.0,1.5]</rosparam>
+         <rosparam param="goal40">[-3.0,-2.0,0.5]</rosparam>
+        <rosparam param="goal41">[3.0,2.0,0.5]</rosparam>
+        <rosparam param="goal42">[2.0,-3.0,0.5]</rosparam>
+        <rosparam param="goal43">[-2.0,3.0,0.5]</rosparam>
+        <rosparam param="goal44">[-3.0,-2.0,1.5]</rosparam>
+        <rosparam param="goal45">[3.0,2.0,1.5]</rosparam>
+        <rosparam param="goal46">[2.0,-3.0,1.5]</rosparam>
+        <rosparam param="goal47">[-2.0,3.0,1.5]</rosparam>
+    </node>
+</launch>

@@ -1,0 +1,94 @@
+<launch>
+    <!-- size of map, change the size inflate x, y, z according to your application -->
+    <arg name="drone_id" default="0"/>
+    <arg name="max_vel" default="1.0"/>
+    <arg name="map_size_x"/>
+    <arg name="map_size_y"/>
+    <arg name="map_size_z"/>
+    <arg name="init_x"/>
+    <arg name="init_y"/>
+    <arg name="init_z"/>
+    <arg name="flight_type" default="2"/>
+    <arg name="point_num" default="1"/>
+    <arg name="target0_x" default="0.0"/>
+    <arg name="target0_y" default="0.0"/>
+    <arg name="target0_z" default="0.0"/>
+    <arg name="target1_x" default="0.0"/>
+    <arg name="target1_y" default="0.0"/>
+    <arg name="target1_z" default="0.0"/>
+    <arg name="target2_x" default="0.0"/>
+    <arg name="target2_y" default="0.0"/>
+    <arg name="target2_z" default="0.0"/>
+    <!-- topic of your odometry such as VIO or LIO -->
+    <arg name="odom_topic"/>
+    <!-- main algorithm params -->
+    <include file="$(find primitive_planner)/launch/advanced_param.xml"> 
+        <arg name="drone_id" value="$(arg drone_id)"/>
+        <arg name="map_size_x_" value="$(arg map_size_x)"/>
+        <arg name="map_size_y_" value="$(arg map_size_y)"/>
+        <arg name="map_size_z_" value="$(arg map_size_z)"/>
+        <arg name="odometry_topic" value="$(arg odom_topic)"/>
+        <!-- camera pose: transform of camera frame in the world frame -->
+        <!-- depth topic: depth image, 640x480 by default -->
+        <!-- don't set cloud_topic if you already set these ones! -->
+        <arg name="camera_pose_topic" value="pcl_render_node/camera_pose"/>
+        <arg name="depth_topic" value="pcl_render_node/depth"/>
+        <!-- topic of point cloud measurement, such as from LIDAR  -->
+        <!-- don't set camera pose and depth, if you already set this one! -->
+        <arg name="cloud_topic" value="pcl_render_node/cloud"/>
+        <!-- intrinsic params of the depth camera -->
+        <arg name="cx" value="321.04638671875"/>
+        <arg name="cy" value="243.44969177246094"/>
+        <arg name="fx" value="387.229248046875"/>
+        <arg name="fy" value="387.229248046875"/>
+        <!-- global waypoints -->
+        <!-- It generates a piecewise min-snap traj passing all waypoints -->
+        <arg name="flight_type" value="$(arg flight_type)" />
+        <arg name="point_num" value="$(arg point_num)" />
+        <arg name="point0_x" value="$(arg target0_x)" />
+        <arg name="point0_y" value="$(arg target0_y)" />
+        <arg name="point0_z" value="$(arg target0_z)" />
+        <arg name="point1_x" value="$(arg target1_x)" />
+        <arg name="point1_y" value="$(arg target1_y)" />
+        <arg name="point1_z" value="$(arg target1_z)" />
+        <arg name="point2_x" value="$(arg target2_x)" />
+        <arg name="point2_y" value="$(arg target2_y)" />
+        <arg name="point2_z" value="$(arg target2_z)" />
+        <arg name="max_vel" value="$(arg max_vel)"/>
+    </include>
+    <!-- trajectory server -->
+    <node pkg="primitive_planner" name="drone_$(arg drone_id)_traj_server" type="traj_server" output="screen">
+        <remap from="position_cmd" to="drone_$(arg drone_id)_planning/pos_cmd"/>
+        <remap from="~planning/selected_path_id" to="drone_$(arg drone_id)_planning/selected_path_id"/>
+        <remap from="~planning/polynomial_traj" to="drone_$(arg drone_id)_planning/polynomial_traj"/>
+        <remap from="~planning/yaw_cmd" to="drone_$(arg drone_id)_planning/yaw_cmd"/>
+        <remap from="~heartbeat" to="/drone_$(arg drone_id)_traj_server/heartbeat"/>
+        <remap from="~odom" to="/drone_$(arg drone_id)_$(arg odom_topic)"/>
+        <remap from="~stop_command" to = "/drone_$(arg drone_id)_planning/stop_command"/>
+        <remap from="~planning/global_goal" to="drone_$(arg drone_id)_planning/global_goal"/>
+        <remap from="~planning/select_path_end" to="drone_$(arg drone_id)_planning/select_path_end"/>
+        <param name="traj_server/time_forward" value="1.0" type="double"/>
+        <param name="traj_server/primitiveFolder" value="$(find primitive_planner)/primitive_library" type="string" />
+        <param name="traj_server/max_vel" value="$(arg max_vel)"/>
+        <!-- real world: consider time delay; empirically set 4 in small drone.-->
+        <param name="traj_server/time_delay_idx" value="0" type="int"/>
+        <param name="init_x" value="$(arg init_x)"/>
+        <param name="init_y" value="$(arg init_y)"/>
+        <param name="init_z" value="$(arg init_z)"/>
+    </node>
+    <!-- use simulator -->
+    <include file="$(find primitive_planner)/launch/simulator.xml">
+        <arg name="drone_id" value="$(arg drone_id)"/>
+        <arg name="map_size_x_" value="$(arg map_size_x)"/>
+        <arg name="map_size_y_" value="$(arg map_size_y)"/>
+        <arg name="map_size_z_" value="$(arg map_size_z)"/>
+        <arg name="init_x_" value="$(arg init_x)"/>
+        <arg name="init_y_" value="$(arg init_y)"/>
+        <arg name="init_z_" value="$(arg init_z)"/>
+        <arg name="odometry_topic" value="$(arg odom_topic)" />
+    </include>
+    <!-- <include file="$(find manual_take_over)/launch/take_over_drone.launch">
+        <arg name="drone_id" value="$(arg drone_id)"/>
+        <arg name="cmd_topic" value="drone_$(arg drone_id)_planning/pos_cmd"/>
+    </include> -->
+</launch>

@@ -1,0 +1,7 @@
+<launch>
+    <!-- 启动tf坐标变换发布节点 -->
+    <node pkg="odom_visualization" type="rotate_tf_for_vis.py" name="rotate_tf_for_vis" output="screen" required="true">
+        <!-- 这里可以添加参数标签来设置角速度 -->
+        <!-- <param name="angular_velocity" value="1.0" /> -->
+    </node>
+</launch>
