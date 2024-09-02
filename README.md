@@ -44,7 +44,7 @@ Open another terminal, publish the trigger
 cd src/scripts
 bash pub_trigger.sh
 ```
-Then the drones will start to fly like this
+Then the drones (drone number is 40) will start to fly like this
 <p align = "center">
 <img src="misc/40_drone.gif" width = "500" height = "347" border="5" />
 </p>
