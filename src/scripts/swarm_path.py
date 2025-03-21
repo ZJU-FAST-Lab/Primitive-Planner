@@ -171,7 +171,7 @@ def solveHorizonToppAndSample(radius, ss, way_pts, vlims, alims, v_start, v_end)
     return pos_xyz, vel_xyz, acc_xyz, traj_duration
 
 def fileVelPathID(lib_dir, v_start, path_id, pos_xyz, vel_xyz, acc_xyz, traj_duration):
-    filename = lib_dir + f"trajectory/{int(round(v_start*10))}/{path_id}_trajectory.ply"
+    filename = lib_dir + f"trajectory/{int(round(v_start*10))}/{path_id-1}_trajectory.ply"
     file_trajectory = open(filename, 'w')
     traj_combine = np.c_[pos_xyz, vel_xyz, acc_xyz]
     print('%d'%traj_combine.shape[0], file=file_trajectory)
@@ -182,7 +182,7 @@ def fileVelPathID(lib_dir, v_start, path_id, pos_xyz, vel_xyz, acc_xyz, traj_dur
     file_trajectory.close()
 
 def filePosPathID(lib_dir, v_start, path_id, pos_xyz, traj_duration):
-    filename = lib_dir + f"trajectory_pos/{int(round(v_start*10))}/{path_id}_trajectory.ply"
+    filename = lib_dir + f"trajectory_pos/{int(round(v_start*10))}/{path_id-1}_trajectory.ply"
     file_trajectory = open(filename, 'w')
     print('%d'%pos_xyz.shape[0], file=file_trajectory)
     print('%f'%traj_duration, file=file_trajectory)
@@ -203,7 +203,7 @@ def filePathAll(lib_dir, pos_all):
     # print('end_header', file=file_path_all)
     print('%d'%pos_all.shape[0], file=file_path_all)
     for i in range(pos_all.shape[0]):
-        print('%f'%pos_all[i,0], '%f'%pos_all[i,1], '%f'%pos_all[i,2], '%d'%pos_all[i,3], file=file_path_all)
+        print('%f'%pos_all[i,0], '%f'%pos_all[i,1], '%f'%pos_all[i,2], '%d'%(pos_all[i,3]-1), file=file_path_all)
     file_path_all.close()
 
 def filePathEnd(lib_dir, primitive_end_all):
