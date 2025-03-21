@@ -1,12 +1,19 @@
 # Primitive_Planner
 
+## Paper
+
+Primitive-Swarm: An Ultra-lightweight and Scalable Planner for Large-scale Aerial Swarms, Accepted by T-RO. [Arxiv](https://arxiv.org/abs/2502.16887)
+
+Author list: Jialiang Hou, Xin Zhou, Neng Pan, Ang Li, Yuxiang Guan, Chao Xu, Zhongxue Gan, Fei Gao
+
+
 ## Requirements
 
 The code is tested on clean Ubuntu 20.04 with ROS noetic installation.
 
 Install the required package toppra:
 ```
-sudo pip3 install toppra
+sudo pip3 install toppra catkin_pkg PyYAML empy matplotlib pyrfc3339
 ```
 
 ## Run the code
