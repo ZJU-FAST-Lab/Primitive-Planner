@@ -88,3 +88,20 @@ sudo cpufreq-set -g performance
 ```
 Otherwise the CPU will run in powersave mode with low frequency.
 
+## Projects Supported by Primitive-Swarm
+
+- **DPNet: Efficient Dead-End Prediction and Avoidance for Vision-Based UAV Navigation**: DPNet combines dead-end prediction with a compact primitive library to proactively prune unsafe trajectories. [[Paper]](https://arxiv.org/abs/2608.16640)
+
+<a href="https://arxiv.org/abs/2608.16640" target="_blank">
+  <p align="center">
+    <img src="misc/dpnet_system_overview.png" width="600" alt="DPNet system overview" />
+  </p>
+</a>
+
+- **Neural-Primitive: An Efficient End-to-end Local Planner with Primitive-based Imitation Learning for Autonomous Flight**: It uses motion primitives as the structured representation for imitation learning, enabling end-to-end local planning for autonomous flight. [[Project]](https://zhitaoliu.github.io/neural-primitive/)
+
+<a href="https://zhitaoliu.github.io/neural-primitive/" target="_blank">
+  <p align="center">
+    <img src="misc/neural_primitive_system_overview.svg" width="600" alt="Neural-Primitive system overview" />
+  </p>
+</a>
