@@ -35,6 +35,8 @@ void PPPlannerManager::initPlanModules(ros::NodeHandle &nh, PlanningVisualizatio
   voxelX_ = boxX_;
   voxelY_ = boxY_ / 2.0;
   voxelZ_ = boxZ_ / 2.0;
+  agentVoxelNumX_ = int(2.0 * voxelX_ / voxelSize_);
+  agentVoxelNumAll_ = agentVoxelNumX_ * voxelNumY_ * voxelNumZ_;
 
   correspondences_.resize(voxelNumAll_);
   for(int i = 0; i < voxelNumAll_; i++){
@@ -419,10 +421,10 @@ void PPPlannerManager::readAgentCorrespondences()
       exit(1);
     }
 
-    std::vector<std::vector<int>> velCorrespondences(voxelNumAll_, std::vector<int>(0, 0));
+    std::vector<std::vector<int>> velCorrespondences(agentVoxelNumAll_, std::vector<int>(0, 0));
 
     int val1, val2, val3, voxelID, pathID, tStart, tEnd;
-    for (int j = 0; j < voxelNumAll_; j++) {
+    for (int j = 0; j < agentVoxelNumAll_; j++) {
 
       val1 = fread(&voxelID, 4, 1, filePtr);
       if (val1 != 1) {
@@ -443,7 +445,7 @@ void PPPlannerManager::readAgentCorrespondences()
           val2 = fread(&tStart, 4, 1, filePtr);
           val3 = fread(&tEnd, 4, 1, filePtr);
 
-          if (voxelID >= 0 && voxelID < voxelNumAll_ && pathID >= 0 && pathID < pathNum_) {
+          if (voxelID >= 0 && voxelID < agentVoxelNumAll_ && pathID >= 0 && pathID < pathNum_) {
             velCorrespondences[voxelID].push_back(pathID);
             velCorrespondences[voxelID].push_back(tStart);
             velCorrespondences[voxelID].push_back(tEnd);
@@ -659,7 +661,7 @@ bool PPPlannerManager::labelAgentCollisionPaths(const Eigen::Vector3d &start_pt,
       // std::cout << "pos_v: " << pos_v << "j: " << j << std::endl;
 
       // TODO: whether in the range of box
-      if((pos_v(0) >= 1e-4 && pos_v(0) <= voxelX_ - 1e-4) && 
+      if((pos_v(0) >= -voxelX_ + 1e-4 && pos_v(0) <= voxelX_ - 1e-4) &&
           (pos_v(1) >= - voxelY_ + 1e-4 && pos_v(1) <= voxelY_ - 1e-4) &&
           (pos_v(2) >= - voxelZ_ + 1e-4 && pos_v(2) <= voxelZ_ - 1e-4))
           {
@@ -677,7 +679,7 @@ bool PPPlannerManager::labelAgentCollisionPaths(const Eigen::Vector3d &start_pt,
             other_cur_time = other_start_time + j * 0.01;
             for(int k = 0; k < occPathNumByVoxel; k++)
             {
-              if(other_cur_time > start_time + allVelCorrespondences_[vel_id][ind][3*k + 1] / 1000 && other_cur_time < start_time + allVelCorrespondences_[vel_id][ind][3*k + 2] / 1000){
+              if(other_cur_time > start_time + allVelCorrespondences_[vel_id][ind][3*k + 1] / 1000.0 && other_cur_time < start_time + allVelCorrespondences_[vel_id][ind][3*k + 2] / 1000.0){
                 // std::cout << "=== labelAgentCollisionPaths ID === " << allVelCorrespondences_[vel_id][ind][3*k] << "  " << 
                 // allVelCorrespondences_[vel_id][ind][3*k+1] << "  " <<
                 // allVelCorrespondences_[vel_id][ind][3*k+2] << std::endl;

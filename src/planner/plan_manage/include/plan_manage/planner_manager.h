@@ -79,6 +79,7 @@ namespace primitive_planner
     double boxX_, boxY_, boxZ_;
     double voxelX_, voxelY_, voxelZ_;
     int voxelNumX_, voxelNumY_, voxelNumZ_, voxelNumAll_;
+    int agentVoxelNumX_, agentVoxelNumAll_;
 
     int pathNum_, sampleSize_;
 
