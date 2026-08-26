@@ -679,7 +679,7 @@ bool PPPlannerManager::labelAgentCollisionPaths(const Eigen::Vector3d &start_pt,
             other_cur_time = other_start_time + j * 0.01;
             for(int k = 0; k < occPathNumByVoxel; k++)
             {
-              if(other_cur_time > start_time + allVelCorrespondences_[vel_id][ind][3*k + 1] / 1000 && other_cur_time < start_time + allVelCorrespondences_[vel_id][ind][3*k + 2] / 1000){
+              if(other_cur_time > start_time + allVelCorrespondences_[vel_id][ind][3*k + 1] / 1000.0 && other_cur_time < start_time + allVelCorrespondences_[vel_id][ind][3*k + 2] / 1000.0){
                 // std::cout << "=== labelAgentCollisionPaths ID === " << allVelCorrespondences_[vel_id][ind][3*k] << "  " << 
                 // allVelCorrespondences_[vel_id][ind][3*k+1] << "  " <<
                 // allVelCorrespondences_[vel_id][ind][3*k+2] << std::endl;
