@@ -278,7 +278,7 @@ def agentCorrespondence(lib_dir, box_x, box_y, box_z, pos_all, agent_inflate_rad
     voxel_y = box_y / 2
     voxel_z = box_z / 2
 
-    voxelNumX = int(box_x / voxelSize)
+    voxelNumX = int(2 * box_x / voxelSize)
     voxelNumY = int(box_y / voxelSize)
     voxelNumZ = int(box_z / voxelSize)
 
